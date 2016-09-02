@@ -29,10 +29,10 @@ class FunSetSuite extends FunSuite {
   /**
    * Tests are written using the "test" operator and the "assert" method.
    */
-  // test("string take") {
-  //   val message = "hello, world"
-  //   assert(message.take(5) == "hello")
-  // }
+   test("string take") {
+     val message = "hello, world"
+     assert(message.take(5) == "hello")
+   }
 
   /**
    * For ScalaTest tests, there exists a special equality operator "===" that
@@ -43,9 +43,9 @@ class FunSetSuite extends FunSuite {
    * Try it out! Change the values so that the assertion fails, and look at the
    * error message.
    */
-  // test("adding ints") {
-  //   assert(1 + 2 === 3)
-  // }
+   test("adding ints") {
+     assert(1 + 2 === 3)
+   }
 
 
   import FunSets._
@@ -110,5 +110,26 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("intersect contains elements that are in both sets") {
+    new TestSets {
+      val s = intersect(s1, s1)
+      val t = intersect(s1, s2)
+      val r = intersect(s2, s2)
+      assert(contains(s, 1), "Intersect 1")
+      assert(contains(r, 2), "Intersect 1")
+      assert(!contains(t, 1), "Intersect 2 should be empty")
+    }
+  }
+
+  test("diff contains elements that are in the first set but not the second") {
+    new TestSets {
+      val s = intersect(s1, s1)
+      val t = intersect(s1, s2)
+      val r = intersect(s2, s2)
+//      assert(contains(t, 1), "Intersect 1")
+//      assert(!contains(r, 2), "Intersect should be empty")
+      assert(!contains(s, 1), "Intersect should be empty")
+    }
+  }
 
 }
