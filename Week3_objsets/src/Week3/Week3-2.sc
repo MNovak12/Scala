@@ -1,3 +1,12 @@
+object scratch {
+  def error(msg: String) = throw new Error(msg)
+
+  val x = null
+  val y: String = x
+
+  if (true) 1 else false
+}
+
 object rationals {
   val x = new Rational(1,3)
   val y = new Rational(5,7)
@@ -44,4 +53,6 @@ object rationals {
 
   }
 }
+
+
 

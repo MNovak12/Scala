@@ -123,12 +123,54 @@ class FunSetSuite extends FunSuite {
 
   test("diff contains elements that are in the first set but not the second") {
     new TestSets {
-      val s = intersect(s1, s1)
-      val t = intersect(s1, s2)
-      val r = intersect(s2, s2)
-//      assert(contains(t, 1), "Intersect 1")
-//      assert(!contains(r, 2), "Intersect should be empty")
-      assert(!contains(s, 1), "Intersect should be empty")
+      val r = diff(s1, s1)
+      val s = diff(s1, s2)
+      val t = diff(s2, s2)
+      assert(!contains(r, 1), "Diff should be empty")
+      assert(contains(s, 1), "Diff should only contain 1")
+      assert(!contains(s, 2), "Diff should only contain 1")
+      assert(!contains(t, 1), "Diff should be empty")
+    }
+  }
+
+  test("return elements of set where function holds") {
+    new TestSets {
+      val r = filter(s1, x => x < 2)
+      val s = filter(s2, x => x > 2)
+      assert(contains(r, 1))
+      assert(contains(r, -1000))
+      assert(contains(s, 3))
+      assert(contains(s, 1000))
+    }
+  }
+
+  test("forall test - function holds for all elements") {
+    new TestSets {
+      val s = union(s1, s2)
+      val r = forall(s, x => x == 1)
+      val t = forall(s, x => x < 1001)
+      val w = forall(s, x => x > -1001)
+      assert(!r, "set contains elements that are not 1")
+      assert(t, "set contains integers from -1000 to 1000")
+      assert(w, "set contains integers from -1000 to 1000")
+    }
+  }
+
+  test("exists test - function holds for at least one element") {
+    new TestSets {
+      val r = exists(s1, x => x == 1)
+      val t = exists(s1, x => x > 1001)
+      val w = exists(s1, x => x < -1001)
+      assert(r, "set contains element that is 1")
+      assert(!t, "set contains integers from -1000 to 1000")
+      assert(!w, "set contains integers from -1000 to 1000")
+    }
+  }
+
+  test("map test") {
+    new TestSets {
+      val r = map(s1, x => x)
+      printSet(r)
     }
   }
 
