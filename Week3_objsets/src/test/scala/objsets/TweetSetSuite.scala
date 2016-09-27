@@ -1,8 +1,8 @@
 package objsets
 
+import java.util.NoSuchElementException
+
 import org.scalatest.FunSuite
-
-
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
@@ -60,12 +60,6 @@ class TweetSetSuite extends FunSuite {
   test("union: with empty set (2)") {
     new TestSets {
       assert(size(set1.union(set5)) === 4)
-    }
-  }
-
-  test("mostRetweeted: with empty set") {
-    new TestSets {
-      assert(set1.mostRetweeted.text == "a")
     }
   }
 
